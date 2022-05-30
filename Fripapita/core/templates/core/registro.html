@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Fripapita | Registro</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../../static/CSS/style_registro.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,300;0,700;0,900;1,100;1,600&family=Montserrat:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="../static/IMG/logo_final.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<header class="header">
+
+  <br>
+  <center>
+    <div><img class="logo_final" src="../static/IMG/Logo_fondo.png" alt=""></div>
+  </center>
+  <br>
+
+
+  <div class="bg-dark">
+    <div class="color-barra">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light color-barra">
+          <a class="navbar-brand" href="#"></a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navg navbar-nav w-100 justify-center-center">
+              <a class="nav-item nav-link active" href="{%  url 'home' %}">Inicio <i class="fa fa-home"
+                  aria-hidden="true"></i></a>
+              <a class="nav-item nav-link" href="#">Promociones<i class="fa-solid fa-burger-soda"></i></a>
+              <a class="nav-item nav-link" href="#">Menú </a>
+
+
+
+
+
+
+
+
+              {% if user.is_authenticated %}
+
+              <li class="dropdown">
+                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ user.username }}<i
+                    class="fa fa-user-circle" aria-hidden="true"></i></a>
+
+                <ul class="dropdown-menu">
+                  <li><a class="nav-item nav-link" href="{%  url 'logout' %}">Cerrar sesión<i class="fa fa-user-times"
+                        aria-hidden="true"></i></a></li>
+
+
+
+                  <li>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+
+
+
+
+              {% else %}
+
+              <a class="nav-item nav-link" href="{%  url 'log' %}">iniciar sesion </a>
+
+              {% endif %}
+
+
+              <a class="nav-item nav-link" href="Carro">Carrito<i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+
+
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <body>
+    {% block start %}
+
+    <center>
+      <br>
+      {% if messages %}
+      <div>
+        {% for i in messages %}
+        <p style="color: greenyellow;">{{ i }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="form-registro">
+        <div class="continer">
+          <form action="{% url 'registrar_usuario'%}" method="POST" class="form" id="form-registro">
+            {% csrf_token %}
+            <div align="center"><img src="../../static/IMG/logo_final.png"></div>
+            <h4>registrarse</h4>
+
+
+
+            <i class="fas"> <span>Ingrese su rut:<span></i>
+            <input class="controls" type="text" name="Rut" id="Rut" placeholder="ejemplo 209756943" required>
+
+            <i class="fas"> <span>Ingrese su nombre de usuario:<span></i>
+            <input class="controls" type="text" name="username" id="usuario" placeholder="ejemplo nicolito" required>
+
+            <i class="fas"> <span>Telefono:<span></i>
+            <input class="controls" type="text" name="Telefono" id="Telefono" placeholder="ejemplo +56951393925" required>
+
+            <i class="fas"> <span>Ingrese su email:<span></i>
+            <input class="controls" type="email" name="email" id="email" placeholder="ejemplo micorreo@mail.com" required>
+            
+            <i class="fas"> <span>Ingrese su contraseña:<span></i>
+            <input class="controls" type="password" name="password" id="password" placeholder="*********" required>
+
+
+            <input type="submit" class="botons btn-danger" id="enviar" value="registrarse">
+
+            <a class="link" href="{% url 'home' %}"></i> Ir a la pagina principal <i class="fa fa-home"aria-hidden="true"></i></a>
+            <br>
+
+
+        </div>
+        <p>¿ya tiene cuenta?</p>
+        <p>¿No tienes una cuenta? <a class="link" href="{% url 'log' %}"></i> Iniciar Sesión <i class="fa fa-user"
+              aria-hidden="true"></i></a></p>
+        <!---<button type="" class="botons btn-danger"> <a href="{% url 'forgetpassword' %}"></a>iniciar sesion</button>--->
+        </form>
+
+
+      </div>
+      </div>
+    </center>
+    {% endblock %}
+
+  </body>
+  <br>
+
+
+
+
+  <!--::::Pie de Pagina::::::-->
+  <footer class="pie-pagina">
+    <div class="grupo-1">
+      <div class="box">
+        <figure>
+          <a href="#">
+            <img src="../static/IMG/logo_final.png" alt="Logo de Fripapita">
+          </a>
+        </figure>
+      </div>
+      <div class="box">
+        <h2>Integrantes</h2>
+        <p>Nicolas Parra</p>
+        <p>Alfonso Muñoz</p>
+        <p>Javier Ruz</p>
+      </div>
+      <div class="box">
+        <h2>SIGUENOS EN REDES SOCIALES</h2>
+        <div class="red-social">
+          <a target="_blank" href="" class="fa fa-facebook"></a>
+          <a target="_blank" href="" class="fa fa-instagram"></a>
+          <a target="_blank" href="" class="fa fa-twitter"></a></a>
+          <a target="_blank" href="" class="fa fa-youtube"></a>
+        </div>
+        <h2>Contacto</h2>
+        <h2>fri_papita.fastfood@gmail.com<i class="fa fa-envelope" aria-hidden="true"></i></h2>
+        <h2>2222-3333-4444 <i class="fa fa-phone-square" aria-hidden="true"></i></h2>
+      </div>
+    </div>
+    <div class="grupo-2">
+      <small>&copy; 2022 <b>Desarrollado por TeamFripapita</b> - @Copyrigth|Todos los Derechos Reservados.</small>
+    </div>
+  </footer>
+
+  <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  </body>
+</header>
